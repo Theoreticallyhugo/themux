@@ -17,7 +17,7 @@ readonly SIZE=(
 
 # interface_get try to automaticaly get the used interface if network_name is empty
 interface_get() {
-  name="$(tmux show-option -gqv "@dracppuccin-network-bandwidth")"
+  name="$(tmux show-option -gqv "@themux-network-bandwidth")"
 
   if [[ -z $name ]]; then
     case "$(uname -s)" in
@@ -96,8 +96,8 @@ main() {
   bandwidth=()
 
   network_name=""
-  show_interface="$(tmux show-option -gqv "@dracppuccin-network-bandwidth-show-interface")"
-  interval_update="$(tmux show-option -gqv "@dracppuccin-network-bandwidth-interval")"
+  show_interface="$(tmux show-option -gqv "@themux-network-bandwidth-show-interface")"
+  interval_update="$(tmux show-option -gqv "@themux-network-bandwidth-interval")"
 
   if [[ -z $interval_update ]]; then
     interval_update=0

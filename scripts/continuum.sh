@@ -3,13 +3,13 @@
 export LC_ALL=en_US.UTF-8
 
 # configuration
-# @dracppuccin-continuum-mode default (countdown|time|alert|interval)
-# @dracppuccin-continuum-time-threshold 15
+# @themux-continuum-mode default (countdown|time|alert|interval)
+# @themux-continuum-time-threshold 15
 
-alert_mode="@dracppuccin-continuum-mode"
-time_threshold="@dracppuccin-continuum-time-threshold"
+alert_mode="@themux-continuum-mode"
+time_threshold="@themux-continuum-time-threshold"
 warn_threshold=360
-first_save="@dracppuccin-continuum-first-save"
+first_save="@themux-continuum-first-save"
 
 # tmux-resurrect and tmux-continuum options
 if [ -d "$HOME/.tmux/resurrect" ]; then

@@ -10,7 +10,7 @@ get_platform()
   case $(uname -s) in
     Linux)
       # use this option for when you know that there is an NVIDIA gpu, but you cant use lspci
-      ignore_lspci=$(get_tmux_option "@dracppuccin-ignore-lspci" false)
+      ignore_lspci=$(get_tmux_option "@themux-ignore-lspci" false)
       if [[ "$ignore_lspci" = true ]]; then
         echo "NVIDIA"
       else
@@ -44,8 +44,8 @@ get_gpu()
 main()
 {
   # storing the refresh rate in the variable RATE, default is 5
-  RATE=$(get_tmux_option "@dracppuccin-refresh-rate" 5)
-  gpu_label=$(get_tmux_option "@dracppuccin-gpu-usage-label" "VRAM")
+  RATE=$(get_tmux_option "@themux-refresh-rate" 5)
+  gpu_label=$(get_tmux_option "@themux-gpu-usage-label" "VRAM")
   gpu_usage=$(get_gpu)
   echo "$gpu_label $gpu_usage"
   sleep $RATE

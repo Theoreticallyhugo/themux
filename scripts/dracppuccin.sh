@@ -9,32 +9,32 @@ source $current_dir/utils.sh
 main()
 {
   # set configuration option variables
-  show_kubernetes_context_label=$(get_tmux_option "@dracppuccin-kubernetes-context-label" "")
-  eks_hide_arn=$(get_tmux_option "@dracppuccin-kubernetes-eks-hide-arn" false)
-  eks_extract_account=$(get_tmux_option "@dracppuccin-kubernetes-eks-extract-account" false)
-  hide_kubernetes_user=$(get_tmux_option "@dracppuccin-kubernetes-hide-user" false)
-  terraform_label=$(get_tmux_option "@dracppuccin-terraform-label" "")
-  show_fahrenheit=$(get_tmux_option "@dracppuccin-show-fahrenheit" true)
-  show_location=$(get_tmux_option "@dracppuccin-show-location" true)
-  fixed_location=$(get_tmux_option "@dracppuccin-fixed-location")
-  show_powerline=$(get_tmux_option "@dracppuccin-show-powerline" false)
-  show_flags=$(get_tmux_option "@dracppuccin-show-flags" false)
-  show_left_icon_static=$(get_tmux_option "@dracppuccin-show-left-icon-static" "")
-  show_left_icon=$(get_tmux_option "@dracppuccin-show-left-icon" "#S")
-  show_left_icon_padding=$(get_tmux_option "@dracppuccin-left-icon-padding" 1)
-  show_military=$(get_tmux_option "@dracppuccin-military-time" false)
-  timezone=$(get_tmux_option "@dracppuccin-set-timezone" "")
-  show_timezone=$(get_tmux_option "@dracppuccin-show-timezone" true)
-  show_left_sep=$(get_tmux_option "@dracppuccin-show-left-sep" )
-  show_right_sep=$(get_tmux_option "@dracppuccin-show-right-sep" )
-  show_border_contrast=$(get_tmux_option "@dracppuccin-border-contrast" false)
-  show_day_month=$(get_tmux_option "@dracppuccin-day-month" false)
-  show_refresh=$(get_tmux_option "@dracppuccin-refresh-rate" 5)
-  show_synchronize_panes_label=$(get_tmux_option "@dracppuccin-synchronize-panes-label" "Sync")
-  time_format=$(get_tmux_option "@dracppuccin-time-format" "")
-  show_ssh_session_port=$(get_tmux_option "@dracppuccin-show-ssh-session-port" false)
-  IFS=' ' read -r -a plugins <<< $(get_tmux_option "@dracppuccin-plugins" "battery network weather")
-  show_empty_plugins=$(get_tmux_option "@dracppuccin-show-empty-plugins" true)
+  show_kubernetes_context_label=$(get_tmux_option "@themux-kubernetes-context-label" "")
+  eks_hide_arn=$(get_tmux_option "@themux-kubernetes-eks-hide-arn" false)
+  eks_extract_account=$(get_tmux_option "@themux-kubernetes-eks-extract-account" false)
+  hide_kubernetes_user=$(get_tmux_option "@themux-kubernetes-hide-user" false)
+  terraform_label=$(get_tmux_option "@themux-terraform-label" "")
+  show_fahrenheit=$(get_tmux_option "@themux-show-fahrenheit" true)
+  show_location=$(get_tmux_option "@themux-show-location" true)
+  fixed_location=$(get_tmux_option "@themux-fixed-location")
+  show_powerline=$(get_tmux_option "@themux-show-powerline" false)
+  show_flags=$(get_tmux_option "@themux-show-flags" false)
+  show_left_icon_static=$(get_tmux_option "@themux-show-left-icon-static" "")
+  show_left_icon=$(get_tmux_option "@themux-show-left-icon" "#S")
+  show_left_icon_padding=$(get_tmux_option "@themux-left-icon-padding" 1)
+  show_military=$(get_tmux_option "@themux-military-time" false)
+  timezone=$(get_tmux_option "@themux-set-timezone" "")
+  show_timezone=$(get_tmux_option "@themux-show-timezone" true)
+  show_left_sep=$(get_tmux_option "@themux-show-left-sep" )
+  show_right_sep=$(get_tmux_option "@themux-show-right-sep" )
+  show_border_contrast=$(get_tmux_option "@themux-border-contrast" false)
+  show_day_month=$(get_tmux_option "@themux-day-month" false)
+  show_refresh=$(get_tmux_option "@themux-refresh-rate" 5)
+  show_synchronize_panes_label=$(get_tmux_option "@themux-synchronize-panes-label" "Sync")
+  time_format=$(get_tmux_option "@themux-time-format" "")
+  show_ssh_session_port=$(get_tmux_option "@themux-show-ssh-session-port" false)
+  IFS=' ' read -r -a plugins <<< $(get_tmux_option "@themux-plugins" "battery network weather")
+  show_empty_plugins=$(get_tmux_option "@themux-show-empty-plugins" true)
 
   # Dracula Color Pallette
   white='#cdd6f4'
@@ -169,7 +169,7 @@ main()
     if case $plugin in custom:*) true;; *) false;; esac; then
       script=${plugin#"custom:"}
       if [[ -x "${current_dir}/${script}" ]]; then
-        IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracppuccin-custom-plugin-colors" "cyan dark_gray")
+        IFS=' ' read -r -a colors <<<$(get_tmux_option "@themux-custom-plugin-colors" "cyan dark_gray")
         script="#($current_dir/${script})"
       else
         colors[0]="red"
@@ -178,104 +178,104 @@ main()
       fi
 
     elif [ $plugin = "cwd" ]; then
-      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracppuccin-cwd-colors" "dark_gray white")
+      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@themux-cwd-colors" "dark_gray white")
       tmux set-option -g status-right-length 250
       script="#($current_dir/cwd.sh)"
 
     elif [ $plugin = "fossil" ]; then
-      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracppuccin-fossil-colors" "green dark_gray")
+      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@themux-fossil-colors" "green dark_gray")
       tmux set-option -g status-right-length 250
       script="#($current_dir/fossil.sh)"
 
     elif [ $plugin = "git" ]; then
-      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracppuccin-git-colors" "green dark_gray")
+      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@themux-git-colors" "green dark_gray")
       tmux set-option -g status-right-length 250
       script="#($current_dir/git.sh)"
 
     elif [ $plugin = "hg" ]; then
-      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracppuccin-hg-colors" "green dark_gray")
+      IFS=' ' read -r -a colors  <<< $(get_tmux_option "@themux-hg-colors" "green dark_gray")
       tmux set-option -g status-right-length 250
       script="#($current_dir/hg.sh)"
 
     elif [ $plugin = "battery" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-battery-colors" "pink dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-battery-colors" "pink dark_gray")
       script="#($current_dir/battery.sh)"
 
     elif [ $plugin = "gpu-usage" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-gpu-usage-colors" "pink dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-gpu-usage-colors" "pink dark_gray")
       script="#($current_dir/gpu_usage.sh)"
 
     elif [ $plugin = "gpu-ram-usage" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-gpu-ram-usage-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-gpu-ram-usage-colors" "cyan dark_gray")
       script="#($current_dir/gpu_ram_info.sh)"
 
     elif [ $plugin = "gpu-power-draw" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-gpu-power-draw-colors" "green dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-gpu-power-draw-colors" "green dark_gray")
       script="#($current_dir/gpu_power.sh)"
 
     elif [ $plugin = "cpu-usage" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-cpu-usage-colors" "orange dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-cpu-usage-colors" "orange dark_gray")
       script="#($current_dir/cpu_info.sh)"
 
     elif [ $plugin = "ram-usage" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-ram-usage-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-ram-usage-colors" "cyan dark_gray")
       script="#($current_dir/ram_info.sh)"
 
     elif [ $plugin = "tmux-ram-usage" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-tmux-ram-usage-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-tmux-ram-usage-colors" "cyan dark_gray")
       script="#($current_dir/tmux_ram_info.sh)"
 
     elif [ $plugin = "network" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-network-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-network-colors" "cyan dark_gray")
       script="#($current_dir/network.sh)"
 
     elif [ $plugin = "network-bandwidth" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-network-bandwidth-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-network-bandwidth-colors" "cyan dark_gray")
       tmux set-option -g status-right-length 250
       script="#($current_dir/network_bandwidth.sh)"
 
     elif [ $plugin = "network-ping" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracppuccin-network-ping-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@themux-network-ping-colors" "cyan dark_gray")
       script="#($current_dir/network_ping.sh)"
 
     elif [ $plugin = "network-vpn" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracppuccin-network-vpn-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@themux-network-vpn-colors" "cyan dark_gray")
       script="#($current_dir/network_vpn.sh)"
 
     elif [ $plugin = "attached-clients" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracppuccin-attached-clients-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@themux-attached-clients-colors" "cyan dark_gray")
       script="#($current_dir/attached_clients.sh)"
 
     elif [ $plugin = "mpc" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracppuccin-mpc-colors" "green dark_gray")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@themux-mpc-colors" "green dark_gray")
       script="#($current_dir/mpc.sh)"
 
     elif [ $plugin = "spotify-tui" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracppuccin-spotify-tui-colors" "green dark_gray")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@themux-spotify-tui-colors" "green dark_gray")
       script="#($current_dir/spotify-tui.sh)"
 
     elif [ $plugin = "playerctl" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracppuccin-playerctl-colors" "green dark_gray")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@themux-playerctl-colors" "green dark_gray")
       script="#($current_dir/playerctl.sh)"
 
     elif [ $plugin = "kubernetes-context" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracppuccin-kubernetes-context-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@themux-kubernetes-context-colors" "cyan dark_gray")
       script="#($current_dir/kubernetes_context.sh $eks_hide_arn $eks_extract_account $hide_kubernetes_user $show_kubernetes_context_label)"
 
     elif [ $plugin = "terraform" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracppuccin-terraform-colors" "light_purple dark_gray")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@themux-terraform-colors" "light_purple dark_gray")
       script="#($current_dir/terraform.sh $terraform_label)"
 
     elif [ $plugin = "continuum" ]; then
-      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracppuccin-continuum-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@themux-continuum-colors" "cyan dark_gray")
       script="#($current_dir/continuum.sh)"
 
     elif [ $plugin = "weather" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-weather-colors" "orange dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-weather-colors" "orange dark_gray")
       script="#($current_dir/weather_wrapper.sh $show_fahrenheit $show_location '$fixed_location')"
 
     elif [ $plugin = "time" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-time-colors" "dark_purple dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-time-colors" "dark_purple dark_gray")
       if [ -n "$time_format" ]; then
         script=${time_format}
       else
@@ -290,19 +290,19 @@ main()
         fi
       fi
     elif [ $plugin = "synchronize-panes" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-synchronize-panes-colors" "cyan dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-synchronize-panes-colors" "cyan dark_gray")
       script="#($current_dir/synchronize_panes.sh $show_synchronize_panes_label)"
 
     elif [ $plugin = "ssh-session" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-ssh-session-colors" "green dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-ssh-session-colors" "green dark_gray")
       script="#($current_dir/ssh_session.sh $show_ssh_session_port)"
 
     elif [ $plugin = "tailupdate" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-tailupdate-colors" "Red dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-tailupdate-colors" "Red dark_gray")
       script="#($current_dir/tailupdate.sh)"
 
     elif [ $plugin = "tailexit" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracppuccin-tailexit-colors" "Red dark_gray")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@themux-tailexit-colors" "Red dark_gray")
       script="#($current_dir/tailexit.sh)"
       # script="aaaaa"
 

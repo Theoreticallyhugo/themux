@@ -8,7 +8,7 @@ source $current_dir/utils.sh
 main()
 {
   # storing the refresh rate in the variable RATE, default is 5
-  RATE=$(get_tmux_option "@dracppuccin-refresh-rate" 5)
+  RATE=$(get_tmux_option "@themux-refresh-rate" 5)
 
   if ! command -v spt &> /dev/null
   then
@@ -21,7 +21,7 @@ main()
     exit 0
   fi
 
-  FORMAT=$(get_tmux_option "@dracppuccin-spotify-tui-format" "%f %s %t - %a")
+  FORMAT=$(get_tmux_option "@themux-spotify-tui-format" "%f %s %t - %a")
   spotify_playback=$(spt playback -f "${FORMAT}")
   echo ${spotify_playback} | head -c 30
 

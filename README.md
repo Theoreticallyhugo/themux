@@ -6,6 +6,7 @@ my dracula based tmux plugin
 - if you have an nvidia gpu, but cant use lspci
     - set -g @dracppuccin-ignore-lspci true
 - if youre still using dracula options, use `sed -i "" -e "s/@dracula-/@dracppuccin-/g" <filename(s)>` to migrate
+- if youre still using dracppuccin- options, use `sed -i "" -e "s/@dracppuccin-/@themux-/g" <filename(s)>` to migrate
 
 
 ## LICENSE

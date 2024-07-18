@@ -3,12 +3,12 @@
 current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $current_dir/utils.sh
 
-IFS=' ' read -r -a hide_status <<< $(get_tmux_option "@dracppuccin-git-disable-status" "false")
-IFS=' ' read -r -a current_symbol <<< $(get_tmux_option "@dracppuccin-git-show-current-symbol" "✓")
-IFS=' ' read -r -a diff_symbol <<< $(get_tmux_option "@dracppuccin-git-show-diff-symbol" "!")
-IFS=' ' read -r -a no_repo_message <<< $(get_tmux_option "@dracppuccin-git-no-repo-message" "")
-IFS=' ' read -r -a no_untracked_files <<< $(get_tmux_option "@dracppuccin-git-no-untracked-files" "false")
-IFS=' ' read -r -a show_remote_status <<< $(get_tmux_option "@dracppuccin-git-show-remote-status" "false")
+IFS=' ' read -r -a hide_status <<< $(get_tmux_option "@themux-git-disable-status" "false")
+IFS=' ' read -r -a current_symbol <<< $(get_tmux_option "@themux-git-show-current-symbol" "✓")
+IFS=' ' read -r -a diff_symbol <<< $(get_tmux_option "@themux-git-show-diff-symbol" "!")
+IFS=' ' read -r -a no_repo_message <<< $(get_tmux_option "@themux-git-no-repo-message" "")
+IFS=' ' read -r -a no_untracked_files <<< $(get_tmux_option "@themux-git-no-untracked-files" "false")
+IFS=' ' read -r -a show_remote_status <<< $(get_tmux_option "@themux-git-show-remote-status" "false")
 
 # Get added, modified, updated and deleted files from git status
 getChanges()

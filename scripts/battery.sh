@@ -93,67 +93,46 @@ battery_status()
       ;;
   esac
 
-  bat_perc=$(battery_percent | sed "s/%//")
-  # bat_perc=9 # for testing purposes
-  # 󰂎󰁺󰁻󰁼󰁽󰁾󰁿󰂀󰂁󰂂󰁹
+  tmp_bat_perc=$(battery_percent)
+  bat_perc="${tmp_bat_perc%\%}"
 
   case $status in
     discharging|Discharging)
       # discharging, no AC
-      if [ $bat_perc -lt 10 ]; then
-        echo "󰂎"
-      elif [[ $bat_perc -lt 20 ]]; then
-        echo "󰁺"
-      elif [[ $bat_perc -lt 30 ]]; then
-        echo "󰁻"
-      elif [[ $bat_perc -lt 40 ]]; then
-        echo "󰁼"
-      elif [[ $bat_perc -lt 50 ]]; then
-        echo "󰁽"
-      elif [[ $bat_perc -lt 60 ]]; then
-        echo "󰁾"
-      elif [[ $bat_perc -lt 70 ]]; then
-        echo "󰁿"
-      elif [[ $bat_perc -lt 80 ]]; then
-        echo "󰂀"
-      elif [[ $bat_perc -lt 90 ]]; then
-        echo "󰂁"
-      elif [[ $bat_perc -lt 100 ]]; then
-        echo "󰂂"
-      else
-        echo "󰁹"
-      fi
-      # echo $label
+      declare -A battery_labels=(
+        [0]="󰂎"
+        [10]="󰁺"
+        [20]="󰁻"
+        [30]="󰁼"
+        [40]="󰁽"
+        [50]="󰁾"
+        [60]="󰁿"
+        [70]="󰂀"
+        [80]="󰂁"
+        [90]="󰂂"
+        [100]="󰁹"
+      )
+      echo "${battery_labels[$((bat_perc/10*10))]:-󰂃}"
       ;;
     high|Full)
       echo "󰁹"
       ;;
     charging|Charging)
       # charging from AC
-      if [ $bat_perc -lt 10 ]; then
-        echo "󰂎"
-      elif [[ $bat_perc -lt 20 ]]; then
-        echo "󰁺"
-      elif [[ $bat_perc -lt 30 ]]; then
-        echo "󰁻"
-      elif [[ $bat_perc -lt 40 ]]; then
-        echo "󰁼"
-      elif [[ $bat_perc -lt 50 ]]; then
-        echo "󰁽"
-      elif [[ $bat_perc -lt 60 ]]; then
-        echo "󰁾"
-      elif [[ $bat_perc -lt 70 ]]; then
-        echo "󰁿"
-      elif [[ $bat_perc -lt 80 ]]; then
-        echo "󰂀"
-      elif [[ $bat_perc -lt 90 ]]; then
-        echo "󰂁"
-      elif [[ $bat_perc -lt 100 ]]; then
-        echo "󰂂"
-      else
-        echo "󰁹"
-      fi
-      # echo ''
+      declare -A battery_labels=(
+        [0]="󰂎"
+        [10]="󰁺"
+        [20]="󰁻"
+        [30]="󰁼"
+        [40]="󰁽"
+        [50]="󰁾"
+        [60]="󰁿"
+        [70]="󰂀"
+        [80]="󰂁"
+        [90]="󰂂"
+        [100]="󰁹"
+      )
+      echo "${battery_labels[$((bat_perc/10*10))]:-󰂃}"
       ;;
     ACattached)
       # drawing from AC but not charging
@@ -164,14 +143,6 @@ battery_status()
       echo ''
       ;;
   esac
-  ### Old if statements didn't work on BSD, they're probably not POSIX compliant, not sure
-  # if [ $status = 'discharging' ] || [ $status = 'Discharging' ]; then
-  # 	echo ''
-  # # elif [ $status = 'charging' ]; then # This is needed for FreeBSD AC checking support
-  # 	# echo 'AC'
-  # else
-  #  	echo 'AC'
-  # fi
 }
 
 main()

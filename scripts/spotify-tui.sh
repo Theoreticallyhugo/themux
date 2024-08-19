@@ -23,8 +23,12 @@ main()
 
   FORMAT=$(get_tmux_option "@themux-spotify-tui-format" "%f %s %t - %a")
   spotify_playback=$(spt playback -f "${FORMAT}")
-  echo ${spotify_playback} | head -c 30
-
+  max_len=$(get_tmux_option "@themux-spotify-tui-max-len" 0)
+  if [[ $max_len -ne 0 ]] ; then
+    echo ${spotify_playback} | head -c $max_len
+  else
+    echo ${spotify_playback}
+  fi
 }
 
 # run the main driver

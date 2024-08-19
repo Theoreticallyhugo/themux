@@ -138,17 +138,38 @@ battery_status()
       # drawing from AC but not charging
       echo ''
       ;;
+    finishingcharge)
+      echo '󰁹'
+      ;;
     *)
       # something wrong...
       echo ''
       ;;
   esac
+  ### Old if statements didn't work on BSD, they're probably not POSIX compliant, not sure
+  # if [ $status = 'discharging' ] || [ $status = 'Discharging' ]; then
+  # 	echo ''
+  # # elif [ $status = 'charging' ]; then # This is needed for FreeBSD AC checking support
+  # 	# echo 'AC'
+  # else
+  #  	echo 'AC'
+  # fi
 }
 
 main()
 {
-  bat_label=$(get_tmux_option "@themux-battery-label" "")
-  bat_stat=$(battery_status)
+  bat_label=$(get_tmux_option "@themux-battery-label" "♥")
+  if [ "$bat_label" ]; then
+    bat_label=""
+  fi
+
+  show_bat_label=$(get_tmux_option "@themux-show-battery-status" false)
+  if $show_bat_label; then
+    bat_stat=$(battery_status)
+  else
+    bat_stat=""
+  fi
+
   bat_perc=$(battery_percent)
 
   if [ -z "$bat_stat" ]; then # Test if status is empty or not
